@@ -5,6 +5,7 @@ use application\core\Middleware;
 
 define('ROOT_PATH', __DIR__. '/');
 require_once ROOT_PATH . 'application/config/config.php';
+date_default_timezone_set(TIMEZONE);
 
 spl_autoload_register(function($class) {
     $path = str_replace('\\', '/', $class.'.php');

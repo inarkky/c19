@@ -33,8 +33,8 @@ class Main extends Model
 
     public function getStatusForm()
     {
-        $this->cumulative = $this->parseObjectForm("KUMULATIVNO"); 
-        $this->form = $this->parseObjectForm("UKUPNO");
+        $this->cumulative = $this->parseArray($this->parseObjectForm("KUMULATIVNO"), "KUMULATIVNO");
+        $this->form = $this->parseArray($this->parseObjectForm("UKUPNO"), "UKUPNO");
 
         return $this;
     }
@@ -53,7 +53,7 @@ class Main extends Model
     {
         $params  = "&orderByFields="    . urlencode('SLUCAJEVI desc,UMRLI asc');
         $params .= "&resultOffset="     . urlencode('0');
-        $params .= "&resultRecordCount=". urlencode('5');
+        $params .= "&resultRecordCount=". urlencode('25');
         $params .= "&outFields="        . urlencode('*');
         
         $arr = json_decode($this->callAPI($params), true);
@@ -103,6 +103,55 @@ class Main extends Model
         }
         curl_close($curl);
         return $result;
+    }
+
+    private function parseArray($arr, $type)
+    {
+        $parsedArray = [
+            "dates" => [], 
+            "infected" => [],
+            "recovered" => [],
+            "dead" => []
+        ];
+
+        $x1 = array_filter($arr, function ($v, $k) {
+            return $v['attributes']['STATUS'] == 1;
+        }, ARRAY_FILTER_USE_BOTH);
+        $x2 = array_filter($arr, function ($v, $k) {
+            return $v['attributes']['STATUS'] == 2;
+        }, ARRAY_FILTER_USE_BOTH);
+        $x3 = array_filter($arr, function ($v, $k) {
+            return $v['attributes']['STATUS'] == 3;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        foreach($this->arrayTraversing($x1, "DATUM") as $x){ 
+            array_push($parsedArray['dates'], date("d.m.", $x/1000));
+
+            if ($y = array_search($x, $this->arrayTraversing($x1, "DATUM"))) {
+                array_push($parsedArray['infected'], $this->arrayTraversing($x1, $type)[$y]);
+            } else {
+                array_push($parsedArray['infected'], 0);
+            }
+
+            if($y = array_search($x, $this->arrayTraversing($x2, "DATUM"))){
+                array_push($parsedArray['recovered'], $this->arrayTraversing($x2, $type)[$y]);
+            }else{
+                array_push($parsedArray['recovered'], 0);
+            }
+
+            if ($y = array_search($x, $this->arrayTraversing($x3, "DATUM"))) {
+                array_push($parsedArray['dead'], $this->arrayTraversing($x3, $type)[$y]);
+            } else {
+                array_push($parsedArray['dead'], 0);
+            }
+        }
+
+        return $parsedArray;
+    }
+
+    private function arrayTraversing($arr, $param)
+    {
+        return array_column(array_column($arr, 'attributes'), $param);
     }
     
 }

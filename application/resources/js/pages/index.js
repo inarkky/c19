@@ -8,108 +8,66 @@
             return '$' + value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, ' ').replace('.', ',');
         }
     });
-
-    initRealTimeChart();
-    initDonutChart();
-    initSparkline();
 });
 
-var realtime = 'on';
-function initRealTimeChart() {
-    //Real time ==========================================================================================
-    var plot = $.plot('#real_time_chart', [getRandomData()], {
-        series: {
-            shadowSize: 0,
-            color: 'rgb(0, 188, 212)'
-        },
-        grid: {
-            borderColor: '#f3f3f3',
-            borderWidth: 1,
-            tickColor: '#f3f3f3'
-        },
-        lines: {
-            fill: true
-        },
-        yaxis: {
-            min: 0,
-            max: 100
-        },
-        xaxis: {
-            min: 0,
-            max: 100
-        }
-    });
-
-    function updateRealTime() {
-        plot.setData([getRandomData()]);
-        plot.draw();
-
-        var timeout;
-        if (realtime === 'on') {
-            timeout = setTimeout(updateRealTime, 320);
-        } else {
-            clearTimeout(timeout);
-        }
+//Call to reddit endpoint ????????=========================================================================
+$.ajax({
+    url: "https://www.reddit.com/r/coronavirus.json?limit=4",
+    method: 'GET',
+    data: {
+        q: ''
     }
+}).done(function (data) {
+    let x = data.data.children;
+    let y = $("#reddit_list");
+    let z = "";
+    for (var prop in x) {
+        z += '<li>';
+        z += '<a href="' + x[prop].data.url + '" style="color: white;">';
+        z += trimLength(x[prop].data.title, 50);
+        z += '<a>';
+        z += '</li>';
+    }
+    y.append(z);
+});
 
-    updateRealTime();
+twitterCall('ostanidoma');
+twitterCall('CoronavirusCroatia');
 
-    $('#realtime').on('change', function () {
-        realtime = this.checked ? 'on' : 'off';
-        updateRealTime();
-    });
-    //====================================================================================================
-}
-
-function initSparkline() {
-    $(".sparkline").each(function () {
-        var $this = $(this);
-        $this.sparkline('html', $this.data());
-    });
-}
-
-function initDonutChart() {
-    Morris.Donut({
-        element: 'donut_chart',
-        data: [{
-            label: 'Chrome',
-            value: 37
-        }, {
-            label: 'Firefox',
-            value: 30
-        }, {
-            label: 'Safari',
-            value: 18
-        }, {
-            label: 'Opera',
-            value: 12
-        },
-        {
-            label: 'Other',
-            value: 3
-        }],
-        colors: ['rgb(233, 30, 99)', 'rgb(0, 188, 212)', 'rgb(255, 152, 0)', 'rgb(0, 150, 136)', 'rgb(96, 125, 139)'],
-        formatter: function (y) {
-            return y + '%'
+//Call to twitter endpoint ????????=========================================================================
+function twitterCall(param){
+    $.ajax({
+        url: "api/status/twitter?hashtag=" + param,
+        method: 'GET',
+        data: {
+            q: ''
         }
+    }).done(function (data) {
+        let x =JSON.parse(data);
+        let y = $("#" + param);
+        let z = "";
+        let w = 0;
+        (x.statuses.length > 6) ? w = 6 : w = x.statuses.length;
+        for (i = 0; i < w; i++) {
+            z += '<li>';
+            z += trimLength(x.statuses[i].text, 50);
+            z += '</li>';  
+        } 
+        y.append(z);
     });
 }
 
-var data = [], totalPoints = 110;
-function getRandomData() {
-    if (data.length > 0) data = data.slice(1);
+//Trim string helper ????????=========================================================================
+function trimLength(text, maxLength) {
+    text = $.trim(text);
+    let ellipsis = "...";
 
-    while (data.length < totalPoints) {
-        var prev = data.length > 0 ? data[data.length - 1] : 50, y = prev + Math.random() * 10 - 5;
-        if (y < 0) { y = 0; } else if (y > 100) { y = 100; }
-
-        data.push(y);
+    if (text.length > maxLength) {
+        text = text.substring(0, maxLength - ellipsis.length)
+        return text.substring(0, text.lastIndexOf(" ")) + ellipsis;
     }
-
-    var res = [];
-    for (var i = 0; i < data.length; ++i) {
-        res.push([i, data[i]]);
-    }
-
-    return res;
+    else
+        return text;
 }
+
+

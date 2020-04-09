@@ -1,303 +1,345 @@
 <!-- Widgets -->
 <div class="row clearfix">
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-pink hover-expand-effect">
-            <div class="icon">
-                <i class="material-icons">playlist_add_check</i>
-            </div>
-            <div class="content">
-                <div class="text">NEW TASKS</div>
-                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-cyan hover-expand-effect">
             <div class="icon">
-                <i class="material-icons">help</i>
+                <i class="material-icons">face</i>
             </div>
             <div class="content">
-                <div class="text">NEW TICKETS</div>
-                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box bg-light-green hover-expand-effect">
-            <div class="icon">
-                <i class="material-icons">forum</i>
-            </div>
-            <div class="content">
-                <div class="text">NEW COMMENTS</div>
-                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                <div class="text">TESTED</div>
+                <div class="number count-to" data-from="0" data-to="<?php echo $data->state['tested']; ?>" data-speed="1000" data-fresh-interval="20"></div>
             </div>
         </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-orange hover-expand-effect">
             <div class="icon">
-                <i class="material-icons">person_add</i>
+                <i class="material-icons">bug_report</i>
             </div>
             <div class="content">
-                <div class="text">NEW VISITORS</div>
-                <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                <div class="text">INFECTED</div>
+                <div class="number count-to" data-from="0" data-to="<?php echo $data->state['active']; ?>" data-speed="1000" data-fresh-interval="20"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">indeterminate_check_box</i>
+            </div>
+            <div class="content">
+                <div class="text">DEAD</div>
+                <div class="number count-to" data-from="0" data-to="<?php echo $data->state['dead']; ?>" data-speed="15" data-fresh-interval="20"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green hover-expand-effect">
+            <div class="icon">
+                <i class="material-icons">security</i>
+            </div>
+            <div class="content">
+                <div class="text">RECOVERED</div>
+                <div class="number count-to" data-from="0" data-to="<?php echo $data->state['recovered']; ?>" data-speed="1000" data-fresh-interval="20"></div>
             </div>
         </div>
     </div>
 </div>
-<!-- #END# Widgets -->
-<!-- CPU Usage -->
+<!-- Trend -->
 <div class="row clearfix">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
             <div class="header">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6">
-                        <h2>CPU USAGE (%)</h2>
+                        <h2>STATUS BY DATE</h2>
                     </div>
                     <div class="col-xs-12 col-sm-6 align-right">
                         <div class="switch panel-switch-btn">
-                            <span class="m-r-10 font-12">REAL TIME</span>
+                            <span class="m-r-10 font-12">CUMULATIVE</span>
                             <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
                         </div>
                     </div>
                 </div>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="body">
-                <div id="real_time_chart" class="dashboard-flot-chart"></div>
+                <div id="real_time_chart" class="dashboard-flot-chart"><canvas id="real_time_chart_canvas"></canvas></div>
             </div>
         </div>
     </div>
-</div>
-<!-- #END# CPU Usage -->
-<div class="row clearfix">
-    <!-- Visitors -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-            <div class="body bg-pink">
-                <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
-                        data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
-                        data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
-                        data-fill-Color="rgba(0, 188, 212, 0)">
-                    12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
-                </div>
-                <ul class="dashboard-stat-list">
-                    <li>
-                        TODAY
-                        <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
-                    </li>
-                    <li>
-                        YESTERDAY
-                        <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
-                    </li>
-                    <li>
-                        LAST WEEK
-                        <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- #END# Visitors -->
-    <!-- Latest Social Trends -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-            <div class="body bg-cyan">
-                <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
-                <ul class="dashboard-stat-list">
-                    <li>
-                        #socialtrends
-                        <span class="pull-right">
-                            <i class="material-icons">trending_up</i>
-                        </span>
-                    </li>
-                    <li>
-                        #materialdesign
-                        <span class="pull-right">
-                            <i class="material-icons">trending_up</i>
-                        </span>
-                    </li>
-                    <li>#adminbsb</li>
-                    <li>#freeadmintemplate</li>
-                    <li>#bootstraptemplate</li>
-                    <li>
-                        #freehtmltemplate
-                        <span class="pull-right">
-                            <i class="material-icons">trending_up</i>
-                        </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- #END# Latest Social Trends -->
-    <!-- Answered Tickets -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-            <div class="body bg-teal">
-                <div class="font-bold m-b--35">ANSWERED TICKETS</div>
-                <ul class="dashboard-stat-list">
-                    <li>
-                        TODAY
-                        <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        YESTERDAY
-                        <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST WEEK
-                        <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST MONTH
-                        <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST YEAR
-                        <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        ALL
-                        <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- #END# Answered Tickets -->
 </div>
 
 <div class="row clearfix">
-    <!-- Task Info -->
+    <!-- Social -->
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="body bg-pink">
+                <div class="m-b--35 font-bold">/r/Coronavirus</div>
+                <ul class="dashboard-stat-list" id="reddit_list">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="body bg-cyan">
+                <div class="m-b--35 font-bold">#ostanidoma</div>
+                <ul class="dashboard-stat-list" id="ostanidoma">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="body bg-teal">
+                <div class="font-bold m-b--35">#CoronavirusCroatia</div>
+                <ul class="dashboard-stat-list" id="CoronavirusCroatia">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+    <!-- County Info -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <div class="card">
             <div class="header">
-                <h2>TASK INFOS</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2>STATUS BY COUNTY</h2>
             </div>
             <div class="body">
                 <div class="table-responsive">
                     <table class="table table-hover dashboard-task-infos">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Task</th>
-                                <th>Status</th>
-                                <th>Manager</th>
-                                <th>Progress</th>
+                                <th>County</th>
+                                <th>Infected</th>
+                                <th>Dead</th>
+                                <th>Recovered</th>
+                                <th>Deaths per case</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Task A</td>
-                                <td><span class="label bg-green">Doing</span></td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Task B</td>
-                                <td><span class="label bg-blue">To Do</span></td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Task C</td>
-                                <td><span class="label bg-light-blue">On Hold</span></td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Task D</td>
-                                <td><span class="label bg-orange">Wait Approvel</span></td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Task E</td>
-                                <td>
-                                    <span class="label bg-red">Suspended</span>
-                                </td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php foreach ($data->county as $k => $v) { ?>
+                                <tr>
+                                    <td><?php echo $v['attributes']['ZUP_IME']; ?></td>
+                                    <td><?php echo $v['attributes']['TRENUTNO_ZARAZENI']; ?></td>
+                                    <td><?php echo $v['attributes']['UMRLI']; ?></td>
+                                    <td><?php echo $v['attributes']['IZLIJECENI']; ?></td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-red" role="progressbar" aria-valuenow="<?php echo (100 / $v['attributes']['SLUCAJEVI']) * ($v['attributes']['UMRLI'] * 5); ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo (100 / $v['attributes']['SLUCAJEVI']) * ($v['attributes']['UMRLI'] * 5); ?>%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- #END# Task Info -->
-    <!-- Browser Usage -->
+
+    <!-- GRAPHS -->
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card">
             <div class="header">
-                <h2>BROWSER USAGE</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2>STATUS PER CASE</h2>
             </div>
             <div class="body">
                 <div id="donut_chart" class="dashboard-donut-chart"></div>
             </div>
         </div>
     </div>
-    <!-- #END# Browser Usage -->
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="header">
+                <h2>CASES PER COUNTY</h2>
+            </div>
+            <div class="body">
+                <div id="donut_chart_2" class="dashboard-donut-chart"></div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    initDonutChart();
+
+    function initDonutChart() {
+        <?php $sum_cases = 0;
+        foreach ($data->county as $k => $v) {
+            $sum_cases += $v['attributes']['SLUCAJEVI'];
+        }
+        ?>
+        <?php $cases = $data->state['active'] + $data->state['dead'] + $data->state['recovered']; ?>
+
+        Morris.Donut({
+            element: 'donut_chart',
+            data: [{
+                label: 'Infected',
+                value: <?php echo number_format(100 / $cases * $data->state['active'], 2); ?>
+            }, {
+                label: 'Deaths',
+                value: <?php echo number_format(100 / $cases * $data->state['dead'], 2); ?>
+            }, {
+                label: 'Recovered',
+                value: <?php echo number_format(100 / $cases * $data->state['recovered'], 2); ?>
+            }],
+            colors: ['rgb(255, 165, 0)', 'rgb(255, 0, 80)', 'rgb(0, 255, 80)'],
+            formatter: function(y) {
+                return y + '%'
+            }
+        });
+        if ($('#donut_chart_2').length > 0) {
+            Morris.Donut({
+                element: 'donut_chart_2',
+                data: [
+                    <?php foreach ($data->county as $k => $v) { ?> {
+                            label: '<?php echo $v['attributes']['ZUP_IME']; ?>',
+                            value: <?php echo number_format(100 / $sum_cases * $v['attributes']['SLUCAJEVI'], 2); ?>
+                        },
+                    <?php } ?>
+                ],
+                colors: [
+                    'rgb(217, 33, 32)', 'rgb(225, 66, 38)', 'rgb(230, 100, 44)', 'rgb(231, 130, 50)', 'rgb(227, 154, 54)', 'rgb(219, 171, 59)', 'rgb(206, 182, 65)',
+                    'rgb(190, 188, 72)', 'rgb(171, 190, 81)', 'rgb(151, 189, 93)', 'rgb(131, 186, 109)', 'rgb(114, 181, 130)', 'rgb(98, 172, 154)', 'rgb(85, 161, 178)',
+                    'rgb(75, 145, 192)', 'rgb(68, 124, 191)', 'rgb(64, 99, 176)', 'rgb(63, 71, 156)', 'rgb(69, 45, 138)', 'rgb(83, 27, 127)', 'rgb(120, 80, 129)',
+                ],
+                formatter: function(y) {
+                    return y + '%'
+                }
+            });
+        }
+    }
+
+    new Chart(document.getElementById("real_time_chart_canvas").getContext("2d"), getChartJs("kumulativno"));
+
+    $('#realtime').on('change', function() {
+        canvas = document.getElementById("real_time_chart_canvas");
+        ctx = canvas.getContext("2d");
+
+        // clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        let realtime = this.checked ? 'on' : 'off';
+        console.log(realtime);
+
+        if (realtime == 'on') {
+            new Chart(ctx, getChartJs("kumulativno"));
+        } else {
+            new Chart(ctx, getChartJs("forma"));
+        }
+    });
+
+    function timeConverter(timestamp) {
+        let a = new Date(timestamp * 1000);
+        let months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        let month = months[a.getMonth()];
+        let date = a.getDate();
+        let time = date + '.' + month + '.';
+        return time;
+    }
+
+    function getChartJs(type) {
+        let config = null;
+        let labels = [];
+        let infected = [];
+        let dead = [];
+        let recovered = [];
+
+        if (type === "kumulativno") {
+            labels = [
+                <?php foreach ($data->cumulative['dates'] as $x) {
+                    echo "'" . $x . "',";
+                } ?>
+            ];
+            infected = [
+                <?php foreach ($data->cumulative['infected'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+            dead = [
+                <?php foreach ($data->cumulative['dead'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+            recovered = [
+                <?php foreach ($data->cumulative['recovered'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+        } else {
+            labels = [
+                <?php foreach ($data->form['dates'] as $x) {
+                    echo "'" . $x . "',";
+                } ?>
+            ];
+            infected = [
+                <?php foreach ($data->form['infected'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+            dead = [
+                <?php foreach ($data->form['dead'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+            recovered = [
+                <?php foreach ($data->form['recovered'] as $x) {
+                    echo $x . ",";
+                } ?>
+            ];
+        }
+
+        config = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Dead",
+                    data: dead,
+                    borderColor: 'rgba(233, 30, 99, 0.75)',
+                    backgroundColor: 'rgba(233, 30, 99, 0.3)',
+                    pointBorderColor: 'rgba(233, 30, 99, 0)',
+                    pointBackgroundColor: 'rgba(233, 30, 99, 0.9)',
+                    pointBorderWidth: 1
+                }, {
+                    label: "Recovered",
+                    data: recovered,
+                    borderColor: 'rgba(255, 193, 7, 0.75)',
+                    backgroundColor: 'rgba(255, 193, 7, 0.3)',
+                    pointBorderColor: 'rgba(255, 193, 7, 0)',
+                    pointBackgroundColor: 'rgba(255, 193, 7, 0.9)',
+                    pointBorderWidth: 1
+                }, {
+                    label: "Infected",
+                    data: infected,
+                    borderColor: 'rgba(0, 188, 212, 0.75)',
+                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
+                    pointBorderColor: 'rgba(0, 188, 212, 0)',
+                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
+                    pointBorderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: false
+            }
+        }
+
+        return config;
+    }
+</script>

@@ -115,13 +115,3 @@ var runRequests = function (index) {
 
 //runRequests(0);
 
-//Call to reddit endpoint ????????=========================================================================
-$.ajax({
-    url: "https://www.reddit.com/r/coronavirus.json?limit=5",
-    method: 'GET',
-    data: {
-        q: ''
-    }
-}).done(function (data) {
-    console.log(data);
-});

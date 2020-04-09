@@ -9,7 +9,7 @@ class SocialController extends Controller
 {
     public function twitterAction()
     {
-        $this->model->callTwitterRequest();
+        echo $this->model->callTwitterRequest();
     }
 
     public function redditAction()

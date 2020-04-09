@@ -23,12 +23,12 @@ class Social extends Model
 
         $hashtag = $this->request->get("hashtag");
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
-        $getfield = '?q=%23' + $hashtag;
+        $getfield = '?q=%23' . $hashtag;
         $requestMethod = 'GET';
-
+        
         $twitter = new Twitter($settings);
         
-        echo $twitter->setGetfield($getfield)
+        return $twitter->setGetfield($getfield)
             ->buildOauth($url, $requestMethod)
             ->performRequest();
    }
