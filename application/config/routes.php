@@ -44,15 +44,11 @@ return [
 
 	/** 
 	 * AJAX ROUTES FOR SOCIAL NETWORKS
-	 * e.g. TWITTER & REDDIT NEWSFEED
+	 * e.g. TWITTER NEWSFEED
 	 */
 	'api/status/twitter' => [
 		'controller' => 'social',
 		'action' => 'twitter',
-	],
-	'api/status/reddit' => [
-		'controller' => 'social',
-		'action' => 'reddit',
 	],
 
 	/** 

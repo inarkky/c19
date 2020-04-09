@@ -4,121 +4,105 @@ namespace application\models;
 
 
 use application\core\Model;
-use application\core\View;
 
 class Main extends Model 
 {
+    public $state;
+    public $county;
+    public $cumulative;
+    public $form;
 
-    protected $army1;
-    protected $army2;
-
-	public function initiateBattle()
-	{/*
-        $this->checkForEggs($this->request->get("army2"));
-
-        $this->army1 = new Army( $this->request->get("army1") );
-        $this->army2 = new Army( $this->request->get("army2") );
-
-        $response = $this->logBattle();
-
-		return $response;*/
-	}
-
-	private function logBattle()
-    {
-        $iterator = 1;
-
-        $this->log['Initial state'] = [
-            'army1' => $this->army1->getState(),
-            'army2' => $this->army2->getState(),
+	public function getStatusState()
+	{
+        $this->state = [
+            "tested"    => $this->parseObjectState("TESTIRANI"),
+            "active"    => $this->parseObjectState("SLUCAJEVI"),
+            "dead"      => $this->parseObjectState("UMRLI"),
+            "recovered" => $this->parseObjectState("IZLIJECENI")
         ];
 
-        while(true){
-            //army1 napada army2 se brani
-            $a1 = $this->army1->getAttackStrength();
-            $a2 = $this->army2->getDefenceStrength();
-
-            $outcome = $this->calculateOutcome($a1, $a2);
-            $this->resolveOutcome($outcome, 1);
-
-            $this->log["log"]["$iterator. turn 1st phase (Army1 attacks)"] = "$outcome";
-
-            if( $this->isFinished() ) break;
-
-            //army2 napada army1 se brani
-            $a2 = $this->army2->getAttackStrength();
-            $a1 = $this->army1->getDefenceStrength();
-
-            $outcome = $this->calculateOutcome($a2, $a1);
-            $this->resolveOutcome($outcome, 2);
-
-            $this->log["log"]["$iterator. turn 2nd phase (Army2 attacks)"] = "$outcome";
-
-            $iterator++;
-            if( $this->isFinished() ) break;
-
-        }
-
-        $this->log["End state"] = [
-            "army1" => $this->army1->getState(),
-            "army2" => $this->army2->getState(),
-        ];
-
-        return $this->log;
+        return $this;
     }
 
-    private function calculateOutcome($attack, $defence)
+    public function getStatusCounty()
     {
-        if($attack > $defence){
-            $result = "attack wins";
+        $this->county = $this->parseObjectCounty();
 
-        } else {
-            $result = "defence wins";
+        return $this;
+    }
+
+    public function getStatusForm()
+    {
+        $this->cumulative = $this->parseObjectForm("KUMULATIVNO"); 
+        $this->form = $this->parseObjectForm("UKUPNO");
+
+        return $this;
+    }
+
+    private function parseObjectState($status)
+    {
+        $params  = "&outStatistics="    . urlencode('[{"statisticType":"sum","onStatisticField":"'. $status .'","outStatisticFieldName":"value"}]');
+        $params .= "&outFields="        . urlencode('*');
+
+        $arr = json_decode($this->callAPI($params), true);
+        
+        return $arr['features'][0]['attributes']['value'];
+    }
+
+    private function parseObjectCounty()
+    {
+        $params  = "&orderByFields="    . urlencode('SLUCAJEVI desc,UMRLI asc');
+        $params .= "&resultOffset="     . urlencode('0');
+        $params .= "&resultRecordCount=". urlencode('5');
+        $params .= "&outFields="        . urlencode('*');
+        
+        $arr = json_decode($this->callAPI($params), true);
+
+        return $arr['features'];
+    }
+
+    private function parseObjectForm($type)
+    {
+        $params  = "&orderByFields="    . urlencode('DATUM asc');
+        $params .= "&resultOffset="     . urlencode('0');
+        $params .= "&resultRecordCount=". urlencode('2000');
+        $params .= "&outFields="        . urlencode('OBJECTID,' . $type . ',DATUM,STATUS');
+
+        $arr = json_decode($this->callAPI($params, true), true);
+
+        return $arr['features'];
+    }
+
+    private function callAPI($custom, $chrono = false)
+    {
+        $method  = "GET";
+        
+        $params  = "f="                 . urlencode("json");
+        $params .= "&where="            . urlencode('1=1');
+        $params .= "&returnGeometry="   . urlencode('false');
+        $params .= "&spatialRel="       . urlencode('esriSpatialRelIntersects');
+        $params .= "&outSR="            . urlencode('102100');
+        $params .= "&cacheHint="        . urlencode('true');
+        $params .= $custom;
+
+        ($chrono) ? $url = CHRONOLOGY_DATA_SOURCE : $url = REALTIME_DATA_SOURCE;
+        $url .= $params;
+
+        $curl = curl_init();
+        // OPTIONS:
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+        ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        // EXECUTE:
+        $result = curl_exec($curl);
+        if (!$result) {
+            die("Connection Failure");
         }
-
+        curl_close($curl);
         return $result;
     }
-
-    private function resolveOutcome($condition, $phase)
-    {
-        switch ($phase) {
-            case 1:
-                if( strcmp($condition, "attack wins") === 0 ){
-                    $this->army1->attackSuccess();
-                    $this->army2->defenseFail();
-                }else{
-                    $this->army1->attackFail();
-                    $this->army2->defenseSuccess();
-                }
-                break;
-            case 2:
-                if( strcmp($condition, "attack wins") === 0 ){
-                    $this->army2->attackSuccess();
-                    $this->army1->defenseFail();
-                }else{
-                    $this->army2->attackFail();
-                    $this->army1->defenseSuccess();
-                }
-                break;
-        }
-    }
-
-    private function isFinished()
-    {
-        if( $this->army1->getRemainingSoldiers() == 0 ) {
-            $this->log["Victor"] = "Army2";
-
-            return true;
-        } elseif($this->army2->getRemainingSoldiers() == 0) {
-            $this->log["Victor"] = "Army1";
-
-            return true;
-        }
-    }
-
-    private function checkForEggs($egg)
-    {
-        //($egg == 300) ? View::easterEgg() : false ;
-    }
-
+    
 }

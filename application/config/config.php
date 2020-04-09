@@ -1,11 +1,13 @@
 <?php
+//GENERAL SETTINGS
 define('TITLE', 'COVID-19 Analytics');
 define('ENVIRONMENT', 'dev');
 define('ROOT_URI_PATH', '/'); //or if you are on xampp name of the project folder in htdocs
-define('TIMEZONE', 'UTC'); 
+define('TIMEZONE', 'Europe/Zagreb'); 
 define('SOURCE', 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/');
 define('FORMAT', '.csv');
-define('REALTIME_DATA_SOURCE', "https://www.koronavirus.hr/");
+define('REALTIME_DATA_SOURCE', "https://services6.arcgis.com/RNSRmwbDoM8H7zDN/arcgis/rest/services/Slucajevi_view/FeatureServer/0/query?");
+define('CHRONOLOGY_DATA_SOURCE', "https://services6.arcgis.com/RNSRmwbDoM8H7zDN/arcgis/rest/services/Slucajevi_datum_view/FeatureServer/0/query?");
 
 //TWITTER CREDENTIALS
 define("API_KEY", "gQm44fubF10dLHBiFLlb9agIz");

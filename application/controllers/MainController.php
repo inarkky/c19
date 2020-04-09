@@ -7,13 +7,17 @@ use application\core\Controller;
 class MainController extends Controller {
 
 	public function indexAction() {
-		$result = $this->model->initiateBattle();
+		$this->model->getStatusState();
+		$this->model->getStatusCounty();
+		$this->model->getStatusForm();
+		
+		var_dump($this->model);
 
-		$vars = [
+		/*$vars = [
 			'battle' => $result,
 		];
 
-		$this->view->render(null, $vars, 'default');
+		$this->view->render(null, $vars, 'default');*/
 	}
 
 }
