@@ -5,7 +5,6 @@ namespace application\models;
 /*
 	#CoronavirusCroatia
 	#ostanidoma
-	www.reddit.com/r/Coronavirus/ - https://api.reddit.com/r/coronavirus/new.json?limit=5
 */
 
 use application\core\Model;
