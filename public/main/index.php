@@ -224,22 +224,27 @@
         }
     }
 
-    new Chart(document.getElementById("real_time_chart_canvas").getContext("2d"), getChartJs("kumulativno"));
+    var chartx = ""; //Initialize realtime chart
+
+    $(document).ready(function() {
+        chartx = new Chart(document.getElementById("real_time_chart_canvas").getContext("2d"), getChartJs("kumulativno"));
+    });
 
     $('#realtime').on('change', function() {
         canvas = document.getElementById("real_time_chart_canvas");
         ctx = canvas.getContext("2d");
 
         // clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (chartx) {
+            chartx.destroy();
+        }
 
         let realtime = this.checked ? 'on' : 'off';
-        console.log(realtime);
 
         if (realtime == 'on') {
-            new Chart(ctx, getChartJs("kumulativno"));
+            chartx = new Chart(ctx, getChartJs("kumulativno"));
         } else {
-            new Chart(ctx, getChartJs("forma"));
+            chartx = new Chart(ctx, getChartJs("forma"));
         }
     });
 
