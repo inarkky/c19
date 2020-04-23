@@ -35,5 +35,5 @@
 
 <!-- Custom Js -->
 <script src="<?php echo JS_URL ?>admin.js"></script>
-<script src="<?php echo JS_URL ?>pages/index.js"></script>
 <script src="<?php echo JS_URL ?>custom.js"></script>
+<?php echo $custom_script; ?>

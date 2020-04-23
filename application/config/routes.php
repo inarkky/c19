@@ -10,12 +10,48 @@ return [
 		'action' => 'index',
 	],
 
+	/**
+	 * DEFINE ROUTES FOR STATISTICS
+	 */
+	'statistics' => [
+		'controller' => 'statistics',
+		'action' => 'index',
+	],
+
+	/**
+	 * DEFINE ROUTES FOR EXPORT
+	 */
+	'export' => [
+		'controller' => 'export',
+		'action' => 'index',
+	],
+	'export/download' => [
+		'controller' => 'export',
+		'action' => 'download',
+	],
+
+	/**
+	 * DEFINE ROUTES FOR TEMPLATE
+	 */
+	'template' => [
+		'controller' => 'template',
+		'action' => 'index',
+	],
+	'template/element/add' => [
+		'controller' => 'template',
+		'action' => 'add',
+	],
+	'template/element/remove' => [
+		'controller' => 'template',
+		'action' => 'remove',
+	],
+
 	/** 
 	 * DEFINE ROUTES FOR DATASET
-	*/
-	'dataset/list' => [
+	 */
+	'dataset' => [
 		'controller' => 'commands',
-		'action' => 'list',
+		'action' => 'index',
 	],
 	'dataset/get' => [
 		'controller' => 'commands',
@@ -40,6 +76,18 @@ return [
 	'api/dataset/purge' => [
 		'controller' => 'commands',
 		'action' => 'purge',
+	],
+
+	/**
+	 * SETTINGS
+	 */
+	'setting' => [
+		'controller' => 'setting',
+		'action' => 'index',
+	],
+	'setting/update' => [
+		'controller' => 'setting',
+		'action' => 'update',
 	],
 
 	/** 

@@ -8,6 +8,7 @@ class View
 
 	public $path;
 	public $route;
+	public $script;
 
 	public function __construct($route) 
 	{
@@ -15,13 +16,18 @@ class View
 		$this->path = $route['controller'].'/'.$route['action'];
 	}
 
-	public function render($title = TITLE, $vars = [], $layout = 'default') 
+	public function render($title, $vars = [], $layout = 'default') 
 	{
 		if($title === NULL || $title === "" || $title === false) $title = TITLE;
 
 		$path = PUBLIC_PATH . $this->path. '.php';
 		if (file_exists($path)) {
-			
+
+			$custom_script = "pages/" . $this->route["controller"] . ".js";
+			file_exists(RESOURCES_PATH . "js/" . $custom_script)
+				? $custom_script = "<script src='" . JS_URL . $custom_script . "'></script>"
+				: $custom_script = "";
+
 			extract($vars);
 
 			ob_start();
@@ -37,6 +43,8 @@ class View
 		http_response_code($code);
 		$path = PUBLIC_PATH . '/errors/'.$code.'.php';
 		if (file_exists($path)) {
+			$custom_script = "";
+
 			require $path;
 		}
 		exit;
@@ -57,5 +65,4 @@ class View
 	{
 		exit(json_encode(['url' => $url]));
 	}
-
 }	

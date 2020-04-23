@@ -16,6 +16,7 @@
             <?php echo $content; ?>
         </div>
     </section>
+    
 </body>
 
 </html>

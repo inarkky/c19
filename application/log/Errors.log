@@ -1,0 +1,28 @@
+[2020-04-23 18:56:56] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 18:56:56] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 18:56:57] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 18:59:17] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 18:59:46] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:01:10] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:04:12] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:06:31] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:06:50] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:08:22] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:12:34] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:14:21] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:15:38] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:15:47] Exception: "Exception" with message "Operation timed out after 10000 milliseconds with 7592 out of 16254 bytes received" in /srv/http/vhosts/stats.wtf/application/helpers/Twitter.php on line 197
+[2020-04-23 19:15:47] Exception: "Exception" with message "Operation timed out after 10001 milliseconds with 7624 out of 50538 bytes received" in /srv/http/vhosts/stats.wtf/application/helpers/Twitter.php on line 197
+[2020-04-23 19:29:33] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:29:34] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:30:42] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:43:47] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:43:52] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:44:13] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:44:13] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:44:15] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:44:16] Notice: Undefined variable: custom_script in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:47:52] Exception: "Error" with message "Using $this when not in object context" in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:47:53] Exception: "Error" with message "Using $this when not in object context" in /srv/http/vhosts/stats.wtf/public/components/js_includes.php on line 39
+[2020-04-23 19:49:38] Exception: "Error" with message "Using $this when not in object context" in /srv/http/vhosts/stats.wtf/application/core/View.php on line 49
+[2020-04-23 19:49:39] Exception: "Error" with message "Using $this when not in object context" in /srv/http/vhosts/stats.wtf/application/core/View.php on line 49

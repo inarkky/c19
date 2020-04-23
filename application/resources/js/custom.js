@@ -91,7 +91,7 @@ let loop = new Date(start);
     loop = new Date(newDate);
 }*/
 
-var runRequests = function (index) {
+/*var runRequests = function (index) {
     if (arr.length == index) {
         console.log("runRequests Success", arr);
         return;
@@ -111,7 +111,7 @@ var runRequests = function (index) {
             runRequests(++index);
         }
     });
-};
+};*/
 
 //runRequests(0);
 

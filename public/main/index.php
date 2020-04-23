@@ -323,18 +323,18 @@
                 }, {
                     label: "Recovered",
                     data: recovered,
-                    borderColor: 'rgba(255, 193, 7, 0.75)',
-                    backgroundColor: 'rgba(255, 193, 7, 0.3)',
-                    pointBorderColor: 'rgba(255, 193, 7, 0)',
-                    pointBackgroundColor: 'rgba(255, 193, 7, 0.9)',
+                    borderColor: 'rgba(0, 200, 7, 0.75)',
+                    backgroundColor: 'rgba(0, 200, 7, 0.3)',
+                    pointBorderColor: 'rgba(0, 200, 7, 0)',
+                    pointBackgroundColor: 'rgba(0, 200, 7, 0.9)',
                     pointBorderWidth: 1
                 }, {
                     label: "Infected",
                     data: infected,
-                    borderColor: 'rgba(0, 188, 212, 0.75)',
-                    backgroundColor: 'rgba(0, 188, 212, 0.3)',
-                    pointBorderColor: 'rgba(0, 188, 212, 0)',
-                    pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
+                    borderColor: 'rgba(255, 193, 7, 0.75)',
+                    backgroundColor: 'rgba(255, 193, 7, 0.3)',
+                    pointBorderColor: 'rgba(255, 193, 7, 0)',
+                    pointBackgroundColor: 'rgba(255, 193, 7, 0.9)',
                     pointBorderWidth: 1
                 }]
             },

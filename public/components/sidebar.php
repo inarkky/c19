@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/stats">
+                    <a href="/statistics">
                         <i class="material-icons">insert_chart</i>
                         <span>STATISTICS</span>
                     </a>

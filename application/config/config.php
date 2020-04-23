@@ -45,7 +45,7 @@ define('APPLICATION_PATH',   ROOT_PATH              . 'application/');
     define('RESOURCES_PATH',    APPLICATION_PATH    . 'resources/');
         define('ASSETS_PATH',       RESOURCES_PATH  . 'assets/');
         define('IMAGES_PATH',       RESOURCES_PATH  . 'images/');
-    define('LOGS_PATH',        APPLICATION_PATH     . 'storage/');
+    define('LOGS_PATH',        APPLICATION_PATH     . 'log/');
 define('PUBLIC_PATH',        ROOT_PATH              . 'public/');
     define('COMPONENTS_PATH',   PUBLIC_PATH         . 'components/');
         define('HEAD',         COMPONENTS_PATH . 'head.php');
